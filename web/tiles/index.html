@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#ffd94d">
+  <meta name="description" content="奶龙版别踩白块：只点奶龙块，别碰白块喵！">
+  <title>别猜奶块 · 奶龙酱</title>
+  <link rel="stylesheet" href="/tiles/app.css">
+</head>
+<body>
+  <main class="stage">
+    <header class="hud">
+      <span id="score-chip" class="hud-chip">0 分</span>
+      <span id="best-chip" class="hud-chip best">最佳 0</span>
+    </header>
+    <div id="board">
+      <div id="tiles"></div>
+
+      <div id="start-view" class="overlay">
+        <div class="overlay-card">
+          <span class="overlay-badge">手速挑战 ✦</span>
+          <h1>别猜奶块</h1>
+          <p class="overlay-sub">奶龙版别踩白块：只点带奶龙图的「奶龙块」，两只奶龙会轮流上阵喵！</p>
+          <p class="hint warn">点到白块、或漏掉一块奶龙块，游戏就结束啦！</p>
+          <button id="start-button" class="big-button" type="button">开始挑战 👉</button>
+        </div>
+      </div>
+
+      <div id="over-view" class="overlay hidden">
+        <div class="overlay-card">
+          <span class="overlay-badge">奶龙酱在笑你 ✦</span>
+          <h1 id="over-title">游戏结束喵！</h1>
+          <p class="overlay-sub" id="over-detail">这局点了 0 块奶龙块。</p>
+          <p class="best-line" id="over-best">最佳纪录 0 块</p>
+          <button id="retry-button" class="big-button" type="button">再来一局 🔁</button>
+          <a class="back-link" href="/">回游戏大厅</a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="/tiles/app.js"></script>
+</body>
+</html>

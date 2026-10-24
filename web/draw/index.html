@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fff8eb">
+  <meta name="description" content="在画板上画一幅画,让奶龙酱来猜!">
+  <title>你画我猜 · 奶龙酱</title>
+  <link rel="stylesheet" href="/quiz/app.css">
+  <link rel="stylesheet" href="/draw/app.css">
+  <script src="/draw/app.js" defer></script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-star" aria-hidden="true">✦</span><span>奶龙酱的游戏屋</span></div>
+      <span class="edition">H5 试玩版 <span class="edition-dot" aria-hidden="true"></span></span>
+    </header>
+
+    <main class="layout">
+      <aside class="mascot-panel" aria-label="奶龙酱看你画画">
+        <div class="orbit orbit-one" aria-hidden="true"></div>
+        <div class="orbit orbit-two" aria-hidden="true"></div>
+        <span class="floating-mark mark-one" aria-hidden="true">✦</span>
+        <span class="floating-mark mark-two" aria-hidden="true">✳</span>
+        <span class="floating-mark mark-three" aria-hidden="true">✦</span>
+        <div class="mascot-caption"><span class="caption-dot"></span> 奶龙酱瞪大眼睛中</div>
+        <img id="mascot-image" class="mascot-image" src="/draw/mascot/wave.png" alt="奶龙酱好奇地看着画板">
+        <div id="mascot-speech" class="speech-bubble" aria-live="polite">画点什么让奶龙酱猜猜喵！画得越抽象越好玩~</div>
+      </aside>
+
+      <section class="game-panel" aria-labelledby="game-title">
+        <div class="panel-top"><span class="eyebrow">DRAW <span>✦</span> GUESS</span><span class="round-tag">奶龙酱来猜</span></div>
+        <h1 id="game-title">你画我猜<span class="title-spark" aria-hidden="true">✎</span></h1>
+        <p class="subtitle">挑一个题目或者自由发挥，几笔简笔画就够，剩下的交给奶龙酱的眼睛喵！</p>
+
+        <div id="setup-view" class="view">
+          <div class="word-row">
+            <span id="word-chip" class="word-chip idle">还没抽题 · 自由发挥也行</span>
+            <div class="word-actions">
+              <input id="custom-word-input" class="word-input" type="text" maxlength="20"
+                     placeholder="自己出个词" aria-label="自己出题的词语">
+              <button id="custom-word-button" class="tool-button word-button" type="button">就画这个 ✍</button>
+              <button id="word-button" class="tool-button word-button" type="button">奶龙出个题 🎲</button>
+            </div>
+          </div>
+
+          <div class="canvas-frame">
+            <canvas id="draw-canvas" width="800" height="600" aria-label="画板"></canvas>
+            <div id="canvas-empty" class="canvas-empty">在这里开画喵～</div>
+          </div>
+
+          <div class="toolbar" role="toolbar" aria-label="画笔工具">
+            <div id="color-row" class="color-row" aria-label="颜色"></div>
+            <div class="tool-row">
+              <div id="size-row" class="size-row" aria-label="粗细"></div>
+              <span class="tool-divider" aria-hidden="true"></span>
+              <button id="eraser-button" class="tool-button" type="button" aria-pressed="false">🧽 橡皮</button>
+              <button id="undo-button" class="tool-button" type="button" disabled>↩ 撤销</button>
+              <button id="clear-button" class="tool-button" type="button" disabled>🗑 清空</button>
+            </div>
+          </div>
+
+          <div class="draw-actions">
+            <button id="guess-button" class="primary-button" type="button" disabled>让奶龙酱猜 <span aria-hidden="true">👀</span></button>
+            <button id="reset-button" class="secondary-button" type="button">再来一张 ↻</button>
+          </div>
+          <p class="hint">奶龙酱看图要几秒钟喵；想被猜中就画大一点、抓特征！</p>
+        </div>
+
+        <div id="result-view" class="view hidden" aria-live="polite">
+          <div id="verdict-chip" class="verdict-chip">奶龙酱的答案</div>
+          <h2 id="guess-title">奶龙酱觉得是——</h2>
+          <div class="guess-card">
+            <span class="guess-label">奶龙酱猜</span>
+            <p id="guess-text">……</p>
+          </div>
+          <div id="alternatives-row" class="alternatives-row"></div>
+          <div class="explanation-card"><span class="explanation-icon" aria-hidden="true">💬</span><div><strong>奶龙酱想说</strong><p id="comment-text"></p></div></div>
+          <p class="hint">不服的话改两笔再让奶龙酱猜一次，或者点「再来一张」换题开画喵。</p>
+        </div>
+
+        <p id="error-message" class="error-message hidden" role="alert"></p>
+      </section>
+    </main>
+    <footer class="footer"><span>✦ 奶龙酱的游戏屋 · 你画我猜</span><span>画得像不像,全看奶龙酱脑洞</span></footer>
+  </div>
+</body>
+</html>

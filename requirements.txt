@@ -1,0 +1,7 @@
+nonebot2[aiohttp]==2.5.0
+nonebot-adapter-qq==1.7.2
+openai==3.19.2
+pydantic==2.13.5
+python-dotenv==1.2.3
+Pillow>=12,<13
+pypinyin>=0.55,<1

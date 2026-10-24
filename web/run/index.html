@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#8fd3ff">
+  <meta name="description" content="和奶龙酱一起无止境狂奔的 3D 跑酷!">
+  <title>奶龙快跑 · 奶龙酱</title>
+  <link rel="stylesheet" href="/quiz/app.css">
+  <link rel="stylesheet" href="/run/app.css">
+</head>
+<body>
+  <div id="run-shell" class="run-shell">
+    <canvas id="run-canvas" aria-label="奶龙快跑游戏画面"></canvas>
+
+    <div id="hud" class="hud hidden">
+      <span id="hud-hearts" class="hud-chip hearts">❤️❤️❤️</span>
+      <span id="hud-score" class="hud-chip">0 分</span>
+      <span id="hud-coins" class="hud-chip coin">🐟 0</span>
+      <span id="hud-best" class="hud-chip best">最佳 0</span>
+    </div>
+
+    <div id="start-view" class="overlay view">
+      <div class="overlay-card">
+        <span class="overlay-badge">3D 跑酷 ✦</span>
+        <h1>奶龙快跑<span class="title-spark" aria-hidden="true">🏃</span></h1>
+        <p class="overlay-sub">奶龙酱偷吃了冰箱里的蛋糕,被追着满世界跑!躲开路障,捞起点心小鱼干,看看能跑多远喵!</p>
+        <p class="hint hearts-hint">奶龙酱有 3 颗小爱心 ❤️❤️❤️：撞到障碍扣 1 颗，路上偶尔能捡爱心补回来喵！</p>
+        <div class="control-grid">
+          <span class="control-item">⬅➡ / 滑动 <small>换道</small></span>
+          <span class="control-item">⬆ / 空格 / 上滑 <small>跳跃</small></span>
+          <span class="control-item">⬇ / 下滑 <small>铲地滑行</small></span>
+        </div>
+        <button id="start-button" class="primary-button" type="button">开跑! <span aria-hidden="true">↯</span></button>
+        <p class="hint">撞到障碍会扣心；横杆要滑铲，矮栏要跳，奶龙立牌要换道喵。</p>
+      </div>
+    </div>
+
+    <div id="gameover-view" class="overlay view hidden">
+      <div class="overlay-card">
+        <img class="gameover-laugh" src="/run/gameover-laugh.png" alt="奶龙酱捧腹大笑">
+        <span id="over-badge" class="overlay-badge bad">被抓到啦!</span>
+        <h2>这局跑了——</h2>
+        <div class="final-score"><span id="final-score">0</span><span class="final-total">分</span></div>
+        <p id="final-detail" class="final-message"></p>
+        <div class="final-actions">
+          <button id="retry-button" class="primary-button" type="button">再跑一次 <span aria-hidden="true">↻</span></button>
+          <a id="back-link" class="secondary-button back-link" href="/quiz/">游戏屋</a>
+        </div>
+        <p class="hint">最佳成绩保存在这台设备上喵。</p>
+      </div>
+    </div>
+
+    <p id="run-error" class="error-message hidden" role="alert"></p>
+  </div>
+  <script type="importmap">{"imports":{"three":"/run/three.module.js"}}</script>
+  <script type="module">
+    import("/run/boot.js").catch(() => {
+      // 已运行的旧版 H5 服务尚未注册新资源路由时，游戏仍可用；重启机器人后加载 GLB。
+      const three = document.createElement("script");
+      three.src = "/run/three.min.js";
+      three.onload = () => {
+        const game = document.createElement("script");
+        game.src = "/run/app.js";
+        document.body.appendChild(game);
+      };
+      document.body.appendChild(three);
+    });
+  </script>
+</body>
+</html>

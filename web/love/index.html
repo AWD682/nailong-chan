@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fff8eb">
+  <meta name="description" content="心动选修课：一个关于倾听、边界与分寸的校园恋爱互动故事。">
+  <title>心动选修课 · 奶龙酱</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./story.js" defer></script>
+  <script src="./game.js" defer></script>
+</head>
+<body data-phase="title" data-mode="dialogue">
+  <main class="game-shell" id="game-shell">
+    <div id="scene" class="scene bg-campus" aria-hidden="true">
+      <div class="particles" id="particles"></div>
+      <div class="rain-layer" id="rain-layer"></div>
+      <div class="flash-overlay" id="flash-overlay"></div>
+      <div class="paper-grain" aria-hidden="true"></div>
+      <div class="vignette"></div>
+      <div class="characters" id="characters">
+        <div class="character boy" id="boy" data-expression="normal" aria-label="男生"></div>
+        <div class="character girl" id="girl" data-expression="normal" aria-label="奶龙酱"></div>
+      </div>
+      <div class="click-catcher" id="click-catcher" aria-hidden="true"></div>
+    </div>
+
+    <header class="hud" id="hud">
+      <div class="hud-left">
+        <div class="chapter-chip" id="chapter-chip">第一章 · 第三排靠窗</div>
+        <div class="step-chip" id="step-chip">第 1 / 16 次选择</div>
+      </div>
+      <div class="hud-right">
+        <button id="memory-button" class="memory-button" type="button" aria-haspopup="dialog">
+          <span class="memory-icon" aria-hidden="true">✦</span>
+          <span class="memory-label">回忆</span>
+          <span class="memory-count" id="memory-count">0 / 9</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="memory-toast" id="memory-toast" role="status" aria-live="polite"></div>
+
+    <section class="dialogue-layer" id="dialogue-layer">
+      <p class="narration" id="narration"></p>
+      <div class="dialogue-bottom">
+        <div class="options" id="options" aria-label="回应选项" aria-live="polite"></div>
+        <div class="dialogue-card" id="dialogue-card" role="button" tabindex="0" aria-label="点击继续">
+          <span class="speaker" id="speaker">旁白</span>
+          <p class="dialogue-text" id="dialogue-text"></p>
+          <span class="next-hint" id="next-hint">点击继续</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="chat-panel hidden" id="chat-panel" aria-label="微信聊天">
+      <div class="chat-head">
+        <div class="chat-avatar" aria-hidden="true">奶</div>
+        <div class="chat-id">
+          <strong>奶龙酱</strong>
+          <span id="chat-status">微信 · 在线</span>
+        </div>
+        <div class="chat-more" aria-hidden="true">•••</div>
+      </div>
+      <div class="chat-messages" id="chat-messages"></div>
+      <div class="chat-options" id="chat-options" aria-label="回复选项" aria-live="polite"></div>
+    </section>
+
+    <section class="screen title-screen" id="title-screen">
+      <div class="title-card">
+        <p class="title-eyebrow">CAMPUS × LOVE × CHOICE</p>
+        <h1>心动选修课</h1>
+        <p class="title-subtitle">从借一支笔开始，<br>慢慢学会看见一个人。</p>
+        <ul class="title-points" aria-label="游戏信息">
+          <li>5 章</li>
+          <li>16 个选择</li>
+          <li>约 30 分钟</li>
+        </ul>
+        <div class="title-actions">
+          <button id="start-button" class="primary-button" type="button">开始选修 →</button>
+          <button id="continue-button" class="ghost-button hidden" type="button">继续上次</button>
+        </div>
+        <p class="title-note">好感度不会立刻给你答案。<br>走完这段路，再一起复盘。</p>
+        <p class="title-secret">故事里的每一个细节，都可能在后面等你。</p>
+      </div>
+    </section>
+
+    <section class="chapter-overlay hidden" id="chapter-overlay" role="presentation">
+      <div class="chapter-inner">
+        <p class="chapter-number" id="chapter-number">01</p>
+        <span class="chapter-rule" aria-hidden="true"></span>
+        <h2 id="chapter-title">第三排靠窗</h2>
+        <p id="chapter-subtitle">有些喜欢，是从借一支笔开始的。</p>
+      </div>
+      <span class="chapter-skip">点击跳过</span>
+    </section>
+
+    <section class="screen ending-screen hidden" id="ending-screen">
+      <div class="ending-card">
+        <p class="ending-eyebrow">ENDING UNLOCKED ✦</p>
+        <h2 id="ending-title">双向奔赴</h2>
+        <p class="ending-subtitle" id="ending-subtitle"></p>
+        <p class="ending-flavor" id="ending-flavor"></p>
+        <p class="ending-text" id="ending-text"></p>
+
+        <div class="score-reveal">
+          <div class="score-ring" id="score-ring">
+            <span id="ending-score">--</span>
+            <small>心动值</small>
+          </div>
+          <div class="score-copy">
+            <p class="score-label" id="ending-score-label"></p>
+            <div class="score-track" aria-hidden="true">
+              <div class="score-fill" id="ending-score-fill"></div>
+            </div>
+            <p class="score-note">这次不是评分，是把你们走过的路摊开来看。</p>
+          </div>
+        </div>
+
+        <div class="review-grid">
+          <section class="review-block">
+            <h3>她说过的话</h3>
+            <p class="review-sub">记住的细节，后来都用上了吗？</p>
+            <ul class="memory-review" id="memory-review"></ul>
+          </section>
+          <section class="review-block">
+            <h3>本局复盘</h3>
+            <p class="review-sub">做得好的瞬间</p>
+            <ul class="choice-review" id="choice-good"></ul>
+            <p class="review-sub growth">还可以更好的瞬间</p>
+            <ul class="choice-review" id="choice-growth"></ul>
+          </section>
+        </div>
+
+        <p class="ending-advice" id="ending-advice"></p>
+
+        <div class="egg-card">
+          <p class="egg-hint">如果现实里也有一个她，写下她的名字吧。</p>
+          <div class="egg-row">
+            <input id="crush-name" class="egg-input" type="text" maxlength="16"
+                   placeholder="她的名字（可留空）" autocomplete="off" aria-label="她的名字">
+            <button id="egg-button" class="secondary-button" type="button">开启我的故事</button>
+          </div>
+          <p class="egg-privacy">名字只留在当前页面，不会上传，也不会写入存档。</p>
+        </div>
+
+        <div class="ending-actions">
+          <button id="again-button" class="primary-button" type="button">再走一次 ↻</button>
+          <button id="title-button" class="ghost-button" type="button">回到标题</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen egg-screen hidden" id="egg-screen">
+      <div class="egg-poem" aria-live="polite">
+        <p class="egg-to hidden" id="egg-to"></p>
+        <p class="egg-line">爱人如养花，</p>
+        <p class="egg-line">开启自己的故事吧。</p>
+        <button id="egg-back" class="egg-back" type="button">回到开头</button>
+      </div>
+    </section>
+
+    <section class="screen memory-panel hidden" id="memory-panel" role="dialog" aria-modal="true" aria-labelledby="memory-title">
+      <div class="memory-card">
+        <div class="memory-head">
+          <div>
+            <p class="memory-eyebrow">MEMORY</p>
+            <h2 id="memory-title">她说过的话</h2>
+          </div>
+          <button id="memory-close" class="memory-close" type="button" aria-label="关闭回忆">×</button>
+        </div>
+        <p class="memory-sub">你记住的细节，会在某个时刻派上用场。</p>
+        <ul class="memory-list" id="memory-list"></ul>
+        <p class="memory-foot">回忆不会告诉你对错，只记录你听见了什么。</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

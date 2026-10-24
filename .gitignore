@@ -1,0 +1,23 @@
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+
+# Python environment and generated files
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.log
+
+# Runtime data and scratch files
+data/
+tmp/
+*.sqlite3
+*.sqlite3-*
+
+# Local release archives and an older project copy
+*.zip
+*.tar.gz
+*galgame/

@@ -1,0 +1,55 @@
+/* 奶龙快跑:全屏 3D 画布 + 奶龙游戏屋风格的浮层 UI。基础样式复用 /quiz/app.css。 */
+:root{--run-ink:#4b3d42}
+html,body{height:100%}
+body.run-page{overflow:hidden}
+.run-shell{position:fixed;inset:0;background:#8fd3ff}
+#run-canvas{display:block;width:100%;height:100%;touch-action:none}
+.hud{position:absolute;top:calc(14px + env(safe-area-inset-top));left:0;right:0;display:flex;justify-content:center;gap:10px;pointer-events:none;z-index:5}
+.hud-chip{background:#fffdf7;border:2px solid var(--run-ink);border-radius:99px;padding:8px 16px;font-weight:900;font-size:15px;color:var(--run-ink);box-shadow:3px 4px 0 var(--run-ink)}
+.hud-chip.coin{background:#fff2d0}
+.hud-chip.hearts{background:#fff0ef;border-color:#efb8b7;font-size:17px;letter-spacing:2px}
+.hud-chip.hearts.restored{animation:heart-restore .55s ease-out}
+@keyframes heart-restore{35%{transform:scale(1.25);background:#ffd3e2}100%{transform:scale(1)}}
+.hearts-hint{color:#bd6666;font-weight:800}
+.hud-chip.best{background:#e6f5e9;border-color:#9fd5b4;color:#35855f;box-shadow:3px 4px 0 #7dbd97}
+.overlay{position:absolute;inset:0;display:grid;place-items:center;padding:20px;z-index:10;background:rgba(63,53,64,.34);backdrop-filter:blur(3px)}
+.overlay-card{width:min(520px,94vw);max-height:94dvh;overflow:auto;background:#fffdf8;border:2px solid var(--run-ink);border-radius:28px;box-shadow:9px 11px 0 var(--run-ink);padding:34px clamp(22px,5vw,40px) 28px;text-align:center;animation:appear .28s ease}
+.overlay-badge{display:inline-block;background:#e6f5e9;border:1.5px solid #9fd5b4;border-radius:99px;padding:8px 14px;font-size:12px;font-weight:900;color:#35855f}
+.overlay-badge.bad{background:#fff0ef;border-color:#efb8b7;color:#bd6666}
+.overlay-card h1{font-size:clamp(40px,7vw,56px)}
+.overlay-card h2{margin-top:14px}
+.gameover-laugh{display:block;width:min(220px,48vw);max-height:26dvh;object-fit:contain;margin:-12px auto 8px;filter:drop-shadow(0 7px 8px rgba(98,64,51,.18));animation:appear .28s ease}
+.overlay-sub{font-size:13px;line-height:1.75;color:#8d7d78;margin:14px 0 20px}
+.control-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:22px}
+.control-item{display:flex;flex-direction:column;gap:3px;align-items:center;background:#fff6eb;border:1.5px solid #f3dfcc;border-radius:15px;padding:12px 6px;font-size:12px;font-weight:900;color:var(--run-ink)}
+.control-item small{font-weight:800;color:#a49690}
+.final-score{display:flex;align-items:baseline;justify-content:center;gap:8px;margin:6px 0;background:#fff3d8;border:2px solid var(--run-ink);border-radius:20px;box-shadow:5px 6px 0 var(--run-ink);padding:18px 0;color:#e9a748}
+.final-score>span:first-child{font-size:74px;font-weight:1000;line-height:1.2}
+.final-total{font-size:20px;color:#86766d;font-weight:900}
+.final-message{min-height:22px;color:#776965;font-weight:800;margin:16px 0}
+.final-actions{display:grid;grid-template-columns:1.5fr 1fr;gap:12px}
+.back-link{display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--run-ink);font-weight:900}
+#run-error{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);z-index:20;margin:0}
+@media(max-width:600px){
+  .overlay-card{padding:26px 20px 22px;border-radius:22px}
+  .hud-chip{font-size:12px;padding:7px 12px}
+  .hud{gap:7px}
+  .control-grid{grid-template-columns:1fr;gap:7px}
+  .control-item{flex-direction:row;justify-content:space-between;padding:10px 14px}
+  .final-actions{grid-template-columns:1fr}
+  .final-score>span:first-child{font-size:58px}
+}
+@media(max-width:430px){
+  .hud{display:grid;grid-template-columns:repeat(2,max-content);gap:7px 8px;justify-content:center}
+  .hud-chip{text-align:center;min-width:104px;font-size:13px;padding:6px 10px}
+  .hud-chip.hearts{font-size:16px}
+  .overlay{padding:max(12px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left))}
+  .overlay-card{width:min(100%,520px);max-height:calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom));overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+  .gameover-laugh{width:min(150px,42vw);max-height:19dvh;margin:-8px auto 4px}
+  .overlay-card h2{margin:8px 0}
+  .final-score{min-height:92px;padding:6px 0}
+  .final-score>span:first-child{font-size:54px}
+  .final-message{margin:8px 0}
+  .final-actions{gap:8px}
+  .overlay-card>.hint:last-child{margin:10px 0 0}
+}

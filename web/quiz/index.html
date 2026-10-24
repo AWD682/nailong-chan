@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fff8eb">
+  <meta name="description" content="和奶龙酱玩十题一局的喵话真假。">
+  <title>喵话真假 · 奶龙酱</title>
+  <link rel="stylesheet" href="/quiz/app.css">
+  <script src="/quiz/app.js" defer></script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-star" aria-hidden="true">✦</span><span>奶龙酱的游戏屋</span></div>
+      <span class="edition">H5 试玩版 <span class="edition-dot" aria-hidden="true"></span></span>
+    </header>
+
+    <main class="layout">
+      <aside class="mascot-panel" aria-label="奶龙酱为你加油">
+        <div class="orbit orbit-one" aria-hidden="true"></div>
+        <div class="orbit orbit-two" aria-hidden="true"></div>
+        <span class="floating-mark mark-one" aria-hidden="true">✦</span>
+        <span class="floating-mark mark-two" aria-hidden="true">✳</span>
+        <span class="floating-mark mark-three" aria-hidden="true">✦</span>
+        <div class="mascot-caption"><span class="caption-dot"></span> 奶龙酱在线陪玩</div>
+        <img id="mascot-image" class="mascot-image" src="/quiz/mascot/wave.png" alt="奶龙酱开心地挥手">
+        <div id="mascot-speech" class="speech-bubble" aria-live="polite">准备好了吗？今天也来比比谁更机灵喵！</div>
+      </aside>
+
+      <section class="game-panel" aria-labelledby="game-title">
+        <div class="panel-top"><span class="eyebrow">TRUE <span>✦</span> FALSE</span><span class="round-tag">十题一局</span></div>
+        <h1 id="game-title">喵话真假<span class="title-spark" aria-hidden="true">✷</span></h1>
+        <p class="subtitle">别急着信，先想一想。挑个擅长的领域，和奶龙酱比比谁更机灵！</p>
+
+        <div id="start-view" class="view">
+          <div class="intro-card">
+            <div class="intro-icon" aria-hidden="true">?</div>
+            <div><strong>先选 1-3 个分类</strong><p>游戏、动漫、数理化、影视、生物、计算机、歌曲、小说任选。十道题会从你选的分类里混合抽出来！</p></div>
+          </div>
+          <div id="category-grid" class="category-grid" aria-label="题目分类"></div>
+          <button id="start-button" class="primary-button" type="button" disabled>开始挑战 <span aria-hidden="true">↗</span></button>
+          <p id="category-hint" class="hint">先点亮至少 1 个分类，最多选 3 个喵。</p>
+          <div class="start-stats" aria-label="游戏规则"><span><b>10</b> 道题</span><span class="stat-divider"></span><span><b>02</b> 个选项</span><span class="stat-divider"></span><span><b>∞</b> 次挑战</span></div>
+          <p class="hint">开启实时出题时，开局要等奶龙酱几秒钟喵。题目和答案由服务端保管，刷新页面会重新开局。</p>
+        </div>
+
+        <div id="question-view" class="view hidden" aria-live="polite">
+          <div class="game-meta"><span id="question-counter">第 1 / 10 题</span><span id="category-chip" class="category-chip"></span><span id="score-counter">答对 0 题</span></div>
+          <div id="progress-dots" class="progress-dots" aria-label="答题进度"></div>
+          <div class="question-card"><div class="question-label">奶龙酱说——</div><p id="question-text">题目加载中…</p><span class="question-decoration" aria-hidden="true">✦</span></div>
+          <div class="answer-grid"><button id="answer-true" class="answer-button answer-true" type="button"><span class="answer-symbol" aria-hidden="true">✓</span><span>真的</span><small>嗯，听着有道理</small></button><button id="answer-false" class="answer-button answer-false" type="button"><span class="answer-symbol" aria-hidden="true">×</span><span>假的</span><small>等一下，有点可疑</small></button></div>
+          <p class="hint question-hint">选好就不能改啦，凭第一直觉来喵。</p>
+        </div>
+
+        <div id="reveal-view" class="view hidden" aria-live="polite">
+          <div id="verdict-chip" class="verdict-chip">答对啦</div>
+          <h2 id="verdict-title">这题被你看穿啦！</h2>
+          <p id="verdict-question" class="reveal-question"></p>
+          <div class="explanation-card"><span class="explanation-icon" aria-hidden="true">✦</span><div><strong id="correct-answer">正确答案：真的</strong><p id="explanation-text"></p></div></div>
+          <div class="reveal-score"><span id="reveal-score">当前答对 1 / 5</span><span id="streak-text">连对 1 题</span></div>
+          <button id="next-button" class="primary-button" type="button">下一题 <span aria-hidden="true">→</span></button>
+        </div>
+
+        <div id="final-view" class="view hidden" aria-live="polite">
+          <span class="final-badge">挑战完成 ✦</span>
+          <h2>这局结束啦！</h2>
+          <div class="final-score"><span id="final-score">0</span><span class="final-total">/ 10</span></div>
+          <p id="final-message" class="final-message"></p>
+          <div class="final-actions"><button id="again-button" class="primary-button" type="button">换个分类再来 <span aria-hidden="true">↻</span></button><button id="copy-button" class="secondary-button" type="button">复制成绩</button></div>
+        </div>
+
+        <p id="error-message" class="error-message hidden" role="alert"></p>
+      </section>
+    </main>
+    <footer class="footer"><span>✦ 奶龙酱的第一间小游戏屋</span><span>题库仍在继续扩充中</span></footer>
+  </div>
+</body>
+</html>
